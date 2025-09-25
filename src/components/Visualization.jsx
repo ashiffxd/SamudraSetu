@@ -216,31 +216,41 @@ export const Visualization = ({ queryType, query }) => {
   };
 
   const renderDefaultView = () => (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
+    <div className="bg-gradient-to-br from-blue-50 to-teal-50 p-8 h-full flex flex-col justify-center relative overflow-hidden">
+      {/* Ocean Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}></div>
+      </div>
       <div className="text-center">
-        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <TrendingUp className="w-8 h-8 text-blue-500" />
+        <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+          <TrendingUp className="w-10 h-10 text-white animate-pulse" />
         </div>
-        <h3 className="text-xl font-semibold mb-2">Ocean Data Visualizations</h3>
-        <p className="text-gray-600 mb-4">
+        <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
+          Ocean Data Visualizations
+        </h3>
+        <p className="text-gray-600 mb-6 max-w-md mx-auto">
           Ask me about temperature, salinity, oxygen levels, or float locations to see interactive visualizations.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-          <div className="p-3 bg-blue-50 rounded-lg">
-            <div className="text-blue-600 font-semibold">Temperature</div>
-            <div className="text-gray-600">15-30°C range</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm max-w-2xl mx-auto">
+          <div className="p-4 bg-white rounded-xl shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
+            <div className="text-blue-600 font-bold text-lg">24.5°C</div>
+            <div className="text-gray-600 font-medium">Temperature</div>
           </div>
-          <div className="p-3 bg-teal-50 rounded-lg">
-            <div className="text-teal-600 font-semibold">Salinity</div>
-            <div className="text-gray-600">34-35 PSU</div>
+          <div className="p-4 bg-white rounded-xl shadow-lg border-l-4 border-teal-500 hover:shadow-xl transition-shadow">
+            <div className="text-teal-600 font-bold text-lg">34.7</div>
+            <div className="text-gray-600 font-medium">Salinity PSU</div>
           </div>
-          <div className="p-3 bg-green-50 rounded-lg">
-            <div className="text-green-600 font-semibold">Oxygen</div>
-            <div className="text-gray-600">80-200 μmol/kg</div>
+          <div className="p-4 bg-white rounded-xl shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-shadow">
+            <div className="text-green-600 font-bold text-lg">156</div>
+            <div className="text-gray-600 font-medium">Oxygen μmol</div>
           </div>
-          <div className="p-3 bg-red-50 rounded-lg">
-            <div className="text-red-600 font-semibold">Active Floats</div>
-            <div className="text-gray-600">5 locations</div>
+          <div className="p-4 bg-white rounded-xl shadow-lg border-l-4 border-red-500 hover:shadow-xl transition-shadow">
+            <div className="text-red-600 font-bold text-lg">5</div>
+            <div className="text-gray-600 font-medium">Active Floats</div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, MessageCircle, Bot, User } from 'lucide-react';
+import { Send, MessageCircle, Bot, User, Sparkles, Zap } from 'lucide-react';
 
 const sampleQueries = [
   "Show me temperature near Chennai",
@@ -104,11 +104,20 @@ export const ChatInterface = ({ onQuery }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
-      <div className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
+    <div className="flex flex-col h-full bg-white">
+      <div className="p-4 bg-gradient-to-r from-slate-800 via-blue-800 to-teal-700 text-white">
         <div className="flex items-center gap-2">
-          <MessageCircle className="w-5 h-5" />
-          <h2 className="text-lg font-semibold">Ocean Data Assistant</h2>
+          <div className="relative">
+            <MessageCircle className="w-6 h-6" />
+            <Sparkles className="w-3 h-3 absolute -top-1 -right-1 text-yellow-300 animate-pulse" />
+          </div>
+          <h2 className="text-lg font-bold bg-gradient-to-r from-blue-200 to-teal-200 bg-clip-text text-transparent">
+            AI Ocean Assistant
+          </h2>
+          <div className="ml-auto flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-xs text-blue-200">Online</span>
+          </div>
         </div>
       </div>
 
@@ -118,21 +127,28 @@ export const ChatInterface = ({ onQuery }) => {
             key={message.id}
             className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                message.sender === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-800'
-              }`}
-            >
+            <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-md ${
+              message.sender === 'user'
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-800 border'
+            }`}>
               <div className="flex items-start gap-2">
                 {message.sender === 'bot' && (
-                  <Bot className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div className="w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-3 h-3 text-white" />
+                  </div>
                 )}
                 {message.sender === 'user' && (
-                  <User className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <User className="w-3 h-3 text-white" />
+                  </div>
                 )}
-                <p className="text-sm">{message.text}</p>
+                <div className="flex-1">
+                  <p className="text-sm leading-relaxed">{message.text}</p>
+                  <p className="text-xs opacity-70 mt-1">
+                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -140,13 +156,15 @@ export const ChatInterface = ({ onQuery }) => {
         
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 text-gray-800 px-4 py-3 rounded-2xl shadow-md border">
               <div className="flex items-center gap-2">
-                <Bot className="w-4 h-4" />
+                <div className="w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-400 rounded-full flex items-center justify-center">
+                  <Bot className="w-3 h-3 text-white" />
+                </div>
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                 </div>
               </div>
             </div>
@@ -156,13 +174,14 @@ export const ChatInterface = ({ onQuery }) => {
       </div>
 
       <div className="p-4 border-t">
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-4">
           {sampleQueries.map((query, index) => (
             <button
               key={index}
               onClick={() => handleSend(query)}
-              className="px-3 py-1 text-xs bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors"
+              className="px-3 py-2 text-xs bg-gradient-to-r from-blue-50 to-teal-50 text-blue-700 rounded-full hover:from-blue-100 hover:to-teal-100 transition-all duration-300 border border-blue-200 hover:border-blue-300 transform hover:scale-105 font-medium"
             >
+              <Zap className="w-3 h-3 inline mr-1" />
               {query}
             </button>
           ))}
@@ -174,15 +193,15 @@ export const ChatInterface = ({ onQuery }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask about ocean data..."
-            className="flex-1 p-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 p-3 border-2 border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-gray-50 focus:bg-white"
             rows={1}
           />
           <button
             onClick={() => handleSend()}
             disabled={!input.trim()}
-            className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            <Send className="w-5 h-5" />
+            <Send className="w-5 h-5 transform hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>
