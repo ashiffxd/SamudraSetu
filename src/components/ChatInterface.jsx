@@ -114,7 +114,7 @@ export const ChatInterface = ({ onQuery }) => {
           <h2 className="text-lg font-bold bg-gradient-to-r from-blue-200 to-teal-200 bg-clip-text text-transparent">
             AI Ocean Assistant
           </h2>
-          <div className="ml-auto flex items-center space-x-2">
+          <div className="ml-0 flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span className="text-xs text-blue-200">Online</span>
           </div>

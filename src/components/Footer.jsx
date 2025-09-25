@@ -102,11 +102,9 @@ export const Footer = () => {
         <div className="border-t border-white border-opacity-20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-4 text-sm text-blue-200">
-              <span>© 2024 SamudraSetu. All rights reserved.</span>
+              <span>© 2025 SamudraSetu. All rights reserved.</span>
               <div className="hidden md:flex items-center space-x-1">
-                <span>Made with</span>
-                <Heart className="w-4 h-4 text-red-400 animate-pulse" />
-                <span>for Ocean Science</span>
+                
               </div>
             </div>
             <div className="flex items-center space-x-6 text-sm">
